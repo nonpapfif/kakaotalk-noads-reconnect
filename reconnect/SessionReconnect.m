@@ -543,7 +543,8 @@ static BOOL InstallHoldHooks(void) {
     if (self.lastRequest && -[self.lastRequest timeIntervalSinceNow] < 5) return;
     id core = SendObject(NSClassFromString(@"MacTalkCore"), @"core");
     id auth = SendObject(core, @"auth");
-    if (!self.holding && SendBool(SendObject(core, @"loco"), @"loggedIn")) {
+    id loco = SendObject(core, @"loco");
+    if (!self.holding && SendBool(loco, @"loggedIn")) {
         [self showStatus:@"Already connected. No login request was sent."];
         [self showFeedback:@"Already connected" spinning:NO];
         return;
@@ -559,7 +560,14 @@ static BOOL InstallHoldHooks(void) {
         [self showFeedback:@"Login already in progress" spinning:NO];
         return;
     }
-    if (!SendBool(auth, @"canAutoLogin")) {
+    BOOL savedLogin = SendBool(auth, @"canAutoLogin");
+    SEL transportAction = NSSelectorFromString(@"login");
+    // Saved startup login and the current authenticated session are separate.
+    BOOL transportLogin = !savedLogin && self.holding && loco &&
+        SendBool(auth, @"isLoggedIn") && !SendBool(auth, @"isLoggingOut") &&
+        !SendBool(loco, @"loggedIn") &&
+        ValidVoidMethod(class_getInstanceMethod(object_getClass(loco), transportAction), 2);
+    if (!savedLogin && !transportLogin) {
         [self showStatus:@"Saved login is unavailable. Sign in manually with auto-login enabled."];
         [self showFeedback:@"Sign in first" spinning:NO];
         return;
@@ -576,7 +584,11 @@ static BOOL InstallHoldHooks(void) {
     self.lastRequest = [NSDate date];
     [self setReconnectEnabled:NO];
     [self showStatus:@"Requested login once. Check message delivery; the other Mac may log out."];
-    ((void (*)(id, SEL, BOOL))objc_msgSend)(auth, action, YES);
+    if (transportLogin) {
+        ((void (*)(id, SEL))objc_msgSend)(loco, transportAction);
+    } else {
+        ((void (*)(id, SEL, BOOL))objc_msgSend)(auth, action, YES);
+    }
     NSDate *request = self.lastRequest;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         if (self.lastRequest != request || !self.reconnecting) return;
