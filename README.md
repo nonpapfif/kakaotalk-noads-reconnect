@@ -18,7 +18,7 @@ Download **one file** using this permanent link. It follows the latest published
    **Keep me logged in** enabled if needed.
 
 No Python, Xcode, Terminal commands, separate app ZIP, or additional network download is
-required on the destination Mac. A [ZIP of the same installer](https://github.com/nonpapfif/kakaotalk-noads-reconnect/releases/download/v26.9.0-reconnect.7/KakaoTalk-NoAds-Reconnect-Installer-26.9.0.zip)
+required on the destination Mac. A [ZIP of the same installer](https://github.com/nonpapfif/kakaotalk-noads-reconnect/releases/download/v26.9.0-reconnect.8/KakaoTalk-NoAds-Reconnect-Installer-26.9.0.zip)
 is also available. Extract it before opening the installer.
 
 **First-launch approval:** these builds are ad-hoc signed, not Kakao-signed or
@@ -28,7 +28,7 @@ KakaoTalk itself. The installer does not disable Gatekeeper or remove quarantine
 An organization-managed Mac may enforce additional restrictions.
 
 Checksums and the standalone app ZIP are on the
-[release page](https://github.com/nonpapfif/kakaotalk-noads-reconnect/releases/tag/v26.9.0-reconnect.7).
+[release page](https://github.com/nonpapfif/kakaotalk-noads-reconnect/releases/tag/v26.9.0-reconnect.8).
 
 ## What the installer does
 
