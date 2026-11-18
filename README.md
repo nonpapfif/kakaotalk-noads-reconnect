@@ -2,6 +2,10 @@
 
 Both editions remove main-window banners from KakaoTalk for Mac 26.9.0 (build 2006).
 
+The download links below point to the published reconnect.7 installer. Current source also
+includes an unpublished Hold network-gate candidate. Its two-Mac behavior remains unverified.
+See the [development guide](docs/DEVELOPMENT.md) for module responsibilities and local checks.
+
 ## Download and install
 
 | Edition | Features | Download |
@@ -209,11 +213,12 @@ a reviewed release and does not guarantee compatibility with an untested officia
 
 - `docs/`: installation handoff, validation records, and update maintenance.
 - `tools/`: Python build and read-only inspection commands; run with `python3 -m tools.<name>`.
-- `reconnect/`: native reconnect helper, vector assets, and Mach-O load-command injection.
+- `reconnect/`: session hooks, sidebar/feedback views, Hold network gate, updater UI,
+  vector assets, and Mach-O load-command injection.
 - `installer/`: native installer UI and application replacement transaction.
 - `updater/`: external helper and staged-payload validation for updates after exit.
 - `compatibility/`: source validation and reviewed version profiles.
-- `tests/`: compatibility and disposable installer transaction checks.
+- `tests/`: compatibility, native Hold/network-gate, installer transaction, and update checks.
 
 See the [installation handoff](docs/HANDOFF.md) and [validation record](docs/VALIDATION.md).
 The default development branch is `master`.
