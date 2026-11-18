@@ -1,14 +1,25 @@
-# KakaoTalk NoAds + Reconnect for Mac
+# KakaoTalk NoAds for Mac
 
-An unofficial, version-locked KakaoTalk 26.9.0 build with no main-window banners and a
-sidebar button that brings the desktop session back to this Mac. It does not enable
-simultaneous desktop sessions.
+Both editions remove main-window banners from KakaoTalk for Mac 26.9.0 (build 2006).
 
 ## Download and install
 
-Download **one file** using this permanent link. It follows the latest published release:
+| Edition | Features | Download |
+| --- | --- | --- |
+| **NoAds only** | Ad removal with KakaoTalk's usual login behavior. | [Download NoAds DMG](https://github.com/nonpapfif/kakaotalk-noads-reconnect/releases/download/noads-mac/KakaoTalk-NoAds.dmg) |
+| **NoAds + Reconnect** (experimental) | Ad removal plus a manual reconnect button. Switching Macs can require signing in again or cause a crash. | [Download Reconnect installer DMG](https://github.com/nonpapfif/kakaotalk-noads-reconnect/releases/latest/download/KakaoTalk-Installer.dmg) |
 
-[Download the self-contained installer DMG](https://github.com/nonpapfif/kakaotalk-noads-reconnect/releases/latest/download/KakaoTalk-Installer.dmg)
+### Install NoAds only
+
+1. Quit KakaoTalk and keep a copy of your existing app if you want to switch back.
+2. Open the NoAds DMG and drag **KakaoTalk** onto **Applications**.
+3. Open **KakaoTalk** from Applications. This edition uses the same data container as
+   Reconnect. The official app and the older NoAds ZIP use separate containers.
+
+For NoAds updates, download the DMG again. Its [release page](https://github.com/nonpapfif/kakaotalk-noads-reconnect/releases/tag/noads-mac)
+includes the checksum. The in-app updater below belongs to the Reconnect edition.
+
+### Install NoAds + Reconnect
 
 1. Open the DMG and double-click **Install KakaoTalk**.
 2. Finish drafts, then click **Update KakaoTalk** for an existing reconnect build,
@@ -17,9 +28,8 @@ Download **one file** using this permanent link. It follows the latest published
 4. The installer opens `/Applications/KakaoTalk.app`. Sign in directly with
    **Keep me logged in** enabled if needed.
 
-No Python, Xcode, Terminal commands, separate app ZIP, or additional network download is
-required on the destination Mac. A [ZIP of the same installer](https://github.com/nonpapfif/kakaotalk-noads-reconnect/releases/download/v26.9.0-reconnect.7/KakaoTalk-NoAds-Reconnect-Installer-26.9.0.zip)
-is also available. Extract it before opening the installer.
+The installer includes the app. Its checksum and alternative ZIP download are on the
+[latest Reconnect release page](https://github.com/nonpapfif/kakaotalk-noads-reconnect/releases/latest).
 
 **First-launch approval:** these builds are ad-hoc signed, not Kakao-signed or
 Apple-notarized. macOS may block the installer until you explicitly allow it in
@@ -27,10 +37,7 @@ System Settings > Privacy & Security > Open Anyway. Approval may also be require
 KakaoTalk itself. The installer does not disable Gatekeeper or remove quarantine attributes.
 An organization-managed Mac may enforce additional restrictions.
 
-Checksums and the standalone app ZIP are on the
-[release page](https://github.com/nonpapfif/kakaotalk-noads-reconnect/releases/tag/v26.9.0-reconnect.7).
-
-## What the installer does
+## What the Reconnect installer does
 
 - Verifies its bundled payload checksum, app identity, version, executable/helper hashes,
   and code signature before touching the installed application.
@@ -49,7 +56,7 @@ links were not configured. It does not silently claim full success.
 The bundled app is fixed at 26.9.0/build 2006; the GUI refuses a newer installed version.
 The installer refuses an unexpected application identity at the destination.
 
-## Updating an existing patched app
+## Updating an existing Reconnect installation
 
 Run the new installer over the existing reconnect app. It detects the same application
 identity and offers **Update KakaoTalk**. No uninstall or data migration is needed.
@@ -91,7 +98,7 @@ between application identities.**
 | --- | --- | --- |
 | Official KakaoTalk | `com.kakao.KakaoTalkMac` | Its data is retained separately. |
 | Older NoAds build | `local.elsholtzia.KakaoTalkNoAds` | Its data is retained separately. |
-| This reconnect build | `local.elsholtzia.KakaoTalkReconnectExperiment` | Existing reconnect data is reused. |
+| Current NoAds DMG and Reconnect installer | `local.elsholtzia.KakaoTalkReconnectExperiment` | Both editions use the same data container. |
 
 The reconnect identity is retained intentionally, despite its historical name, so existing
 users keep the data container they tested. Only the app's visible name is `KakaoTalk`.
@@ -186,6 +193,10 @@ backup from `/Applications/KakaoTalk Backups/` to `/Applications/KakaoTalk.app`.
 Keep all Library data. Update the Dock and default URL handlers to the restored identity.
 
 ## Updating to future KakaoTalk versions
+
+For NoAds-only updates, replace the DMG and checksum on the **noads-mac** release.
+Keep GitHub's **Latest** designation for Reconnect releases that include
+`KakaoTalk-Installer.dmg`. This keeps the two download links independent.
 
 See [update maintenance guide](docs/UPDATES.md) for the version-profile maintenance workflow and acceptance
 checklist. Only the reviewed 26.9.0/build 2006 source is currently approved. Future versions
